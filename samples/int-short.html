@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Perpendek Interger - (contoh 1200 = 1.2k)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css"></link>
+</head>
+<body>
+    <nav><a href="../index.html">❮</a>Perpendek Interger <small><i>(contoh 1200 = 1.2k)</i></small></nav>
+    <div class="row">
+        <div class="content">
+            <p>Sumber Data:</p>
+            <pre id="original"></pre>
+            <br/>
+            <p>Fungsi:</p>
+<pre>
+<code>import { perpendekAngka } from 'mds-helper';
+
+...
+perpendekAngka(data)
+...</code>
+</pre>
+        </div>
+        <div class="result">
+            <p>Output Data:</p>
+            <pre id="results"></pre>
+        </div>
+    </div>
+    <script>
+        //Sample Data
+        data = 5240;
+        
+        //Fungsi
+        perpendekAngka = (value) => {
+            var suffixes = ["", "k", "m", "b","t"];
+            var suffixNum = Math.floor((""+value).length/3);
+            var shortValue = parseFloat((suffixNum !== 0 ? (value / Math.pow(1000,suffixNum)) : value).toPrecision(2));
+            if (shortValue % 1 != 0) {
+                shortValue = shortValue.toFixed(1);
+            }
+            return shortValue+suffixes[suffixNum];
+        }
+        var update = perpendekAngka(data)
+        
+        //DOM/Binding Data ke HTML
+        document.getElementById("original").textContent = "\"data\":"+JSON.stringify(data, 1,0);
+        document.getElementById("results").textContent = JSON.stringify(update, 1,0);
+
+        console.log('Original:', data);
+        console.log('Update:', update);
+    </script>
+
+</body>
+</html>
+
+

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Filter berdasarkan Multiple KeyValue</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css"></link>
+</head>
+<body>
+    <nav><a href="../index.html">❮</a>Filter berdasarkan Multiple KeyValue</nav>
+    <div class="row">
+        <div class="content">
+            <p>Sumber Data:</p>
+            <pre id="original"></pre>
+            <p>Fungsi:</p>
+<pre>
+<code>import { filterMultiple } from 'mds-helper';
+
+...
+filterMultiple(data, "key", ["Spain","India"])
+...</code>
+</pre>
+        </div>
+        <div class="result">
+            <p>Output Data:</p>
+            <pre id="results"></pre>
+        </div>
+    </div>
+    <script>
+        //Sample Data
+        data = [
+            { country: "Spain", doc_count: 1378 },
+            { country: "Greece", doc_count: 1252 },
+            { country: "India", doc_count: 1259 },
+            { country: ["Greece","India"], doc_count: 1259 }
+        ];
+
+        //Fungsi
+        filterMultiple = (data, key, filterdata) => {
+            filterdata = filterdata.join().toLocaleLowerCase().split(',')
+            var newdata = []
+            console.log(filterdata)
+            data.filter( (a) => {
+                var isArray = Array.isArray(a[key])
+                if (a[key]){
+                    //If values of key is string
+                    if (!isArray){
+                        if (filterdata.indexOf(a[key].toLocaleLowerCase()) !== -1)
+                            newdata.push(a)
+                    }
+                    //If values of key is Array
+                    if (isArray){
+                        a[key].forEach( (val) => {
+                            if (filterdata.indexOf(val.toLocaleLowerCase()) !== -1)
+                                newdata.push(a)
+                        });
+                    }
+                }
+            });
+            return newdata
+        };
+        var update = filterMultiple(data, "country", ["Spain","India"])
+
+        //DOM/Binding Data ke HTML
+        document.getElementById("original").textContent = "\"data\":"+JSON.stringify(data, 1,1);
+        document.getElementById("results").textContent = JSON.stringify(update, 1,1);
+
+        console.log('Original:', data);
+        console.log('Update:', update);
+    </script>
+
+</body>
+</html>
+
+

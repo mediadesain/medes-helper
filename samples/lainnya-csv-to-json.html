@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload CSV dan Convert Ke JSON</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css"></link>
+</head>
+<body>
+    <nav><a href="../index.html">❮</a>Upload CSV dan Convert Ke JSON</nav>
+    <div class="row">
+        <div class="content">
+            <p>Sumber Data:</p>
+            <input type="file" onchange="bukaCSVFile(this.files)" accept=".csv"><br/>
+            <small><i>Upload CSV untuk mendapatkan format json</i></small>
+            <br/>
+            <p>Fungsi:</p>
+<pre>
+<code>import { KonfersiCSVtoJSON } from 'mds-helper';
+
+...
+function bukaCSVFile(files) {
+    KonfersiCSVtoJSON(files, (result) => {
+        document.getElementById("results").textContent = JSON.stringify(result, 0 ,2)
+    });
+};
+...</code>
+</pre>
+        </div>
+        <div class="result">
+            <p>Output Data:</p>
+            <pre id="results"></pre>
+        </div>
+    </div>
+    <script>
+        //Fungsi
+        KonfersiCSVtoJSON = (files, output) => {
+            var jsonresult = []
+            if (window.FileReader) {
+                var reader = new FileReader(); 
+                reader.readAsText(files[0]);
+                //Convert Jika Browser Support
+                reader.onload = loadHandler = (event) => {
+                    var csv = event.target.result;
+                    var lines = csv.split(/\r?\n/);
+                    var headers = lines[0].split(",");
+                    for (var i = 1; i < lines.length - 1; i++) {
+                        var obj = {};
+                        var currentline = lines[i].split(",");
+                        for (var j = 0; j < headers.length; j++) {
+                            obj[headers[j]] = currentline[j];
+                        }
+                        jsonresult.push(obj);
+                    }
+                    output(jsonresult);
+                };
+                //Alert Jika Convert Browser Tidak Suport
+                reader.onerror = errorHandler = (evt) => {
+                if (evt.target.error.name == "NotReadableError")
+                    alert("File is not readable!")
+                };
+            } else {
+                alert('FileReader are not supported in this browser.');
+            }
+        };
+
+        function bukaCSVFile(files) {
+            KonfersiCSVtoJSON(files, (result) => {
+                //DOM/Binding Data ke HTML
+                document.getElementById("results").textContent = JSON.stringify(result, 0 ,2)
+            });
+        };
+    </script>
+
+</body>
+</html>
+
+

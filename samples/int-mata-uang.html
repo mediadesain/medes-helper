@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Konfersi ke Mata Uang</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css"></link>
+</head>
+<body>
+    <nav><a href="../index.html">❮</a>Konfersi ke Mata Uang</nav>
+    <div class="row">
+        <div class="content">
+            <p>Sumber Data:</p>
+            <pre id="original"></pre>
+            <br/>
+            <p>Fungsi:</p>
+<pre>
+<code>import { mataUang } from 'mds-helper';
+
+...
+mataUang(data, 'id-ID', 'IDR', 2);
+mataUang(data, 'ja-JP', 'JYP', 2);
+mataUang(data, 'de-DE', 'EUR', 2);
+mataUang(data, 'en-US', 'USD', 2);
+...</code>
+</pre>
+        </div>
+        <div class="result">
+            <p>Output Data:</p>
+            <pre id="update_1"></pre>
+            <pre id="update_2"></pre>
+            <pre id="update_3"></pre>
+            <pre id="update_4"></pre>
+        </div>
+    </div>
+    <script>
+        //Sample Data
+        data = 524042;
+        
+        //Fungsi
+        mataUang = (money, format, code, decimal) => {
+            return new Intl.NumberFormat(format,
+                { style: 'currency', currency: code, minimumFractionDigits: decimal }
+            ).format(money);
+        }
+        var update_1 = mataUang(data, 'id-ID', 'IDR', 2);
+        var update_2 = mataUang(data, 'ja-JP', 'JYP', 2);
+        var update_3 = mataUang(data, 'de-DE', 'EUR', 2);
+        var update_4 = mataUang(data, 'en-US', 'USD', 2);
+        
+        //DOM/Binding Data ke HTML
+        document.getElementById("original").textContent = "\"data\":"+JSON.stringify(data, 1,0);
+        document.getElementById("update_1").textContent = JSON.stringify(update_1, 1,0);
+        document.getElementById("update_2").textContent = JSON.stringify(update_2, 1,0);
+        document.getElementById("update_3").textContent = JSON.stringify(update_3, 1,0);
+        document.getElementById("update_4").textContent = JSON.stringify(update_4, 1,0);
+
+        console.log('Original:', data);
+        console.log('Update:', update_1, update_2, update_3, update_4);
+    </script>
+
+</body>
+</html>

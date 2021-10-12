@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Konfersi Youtube URL ke Embed & Image Thumbnail URL</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css"></link>
+</head>
+<body>
+    <nav><a href="../index.html">❮</a>Konfersi Youtube URL ke Embed & Image Thumbnail URL</nav>
+    <div class="row">
+        <div class="content">
+            <p>Sumber Data:</p>
+            <pre id="original"></pre>
+            <br/>
+            <p>Fungsi:</p>
+<pre>
+<code>import { youtubeID, youtubeEmbed, youtubeThumbnail } from 'mds-helper';
+
+...
+youtubeID(data);
+youtubeEmbed(data);
+youtubeThumbnail(data, 'maxresdefault');
+//Thumbnail Size: 0/1/2/3/default/sd1/sd2/sd3/sddefault/mq1/mq2/mq3/mqdefault/hq1/hq2/hq3/hqdefault/hq720/maxres1/maxres2/maxres3/maxresdefault
+...</code>
+</pre>
+        </div>
+        <div class="result">
+            <p>Output Data:</p>
+            <pre id="update_1"></pre>
+            <pre id="update_2"></pre>
+            <pre id="update_3"></pre>
+        </div>
+    </div>
+    <script>
+        //Sample Data
+        data = "https://www.youtube.com/watch?v=A7ry4cx6HfY";
+        
+        //Fungsi
+        youtubeID = (url) => {
+            var regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+            var match = url.match(regExp);
+            if (match && match[2].length === 11) return match[2];
+            else return '';
+        };
+        youtubeEmbed = (val) =>{
+            val = youtubeID(val)
+            return 'https://www.youtube.com/embed/'+ val;
+        };
+        youtubeThumbnail = (val, size) =>{
+            val = youtubeID(val)
+            return 'https://i.ytimg.com/vi/'+val+'/'+size+'.jpg';
+        };
+        var update_1 = youtubeID(data);
+        var update_2 = youtubeEmbed(data);
+        var update_3 = youtubeThumbnail(data, 'maxresdefault'); //0/1/2/3/default/sd1/sd2/sd3/sddefault/mq1/mq2/mq3/mqdefault/hq1/hq2/hq3/hqdefault/hq720/maxres1/maxres2/maxres3/maxresdefault
+        
+        // //DOM/Binding Data ke HTML
+        document.getElementById("original").textContent = "\"data\":"+JSON.stringify(data, 1,0);
+        document.getElementById("update_1").textContent = JSON.stringify(update_1, 1,0);
+        document.getElementById("update_2").textContent = JSON.stringify(update_2, 1,0);
+        document.getElementById("update_3").textContent = JSON.stringify(update_3, 1,0);
+
+        // console.log('Original:', data);
+        // console.log('Update:', update);
+    </script>
+
+</body>
+</html>
+
+
+
+

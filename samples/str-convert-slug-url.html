@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Konfersi Format URL Slug</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css"></link>
+</head>
+<body>
+    <nav><a href="../index.html">❮</a>Konfersi Format URL Slug</nav>
+    <div class="row">
+        <div class="content">
+            <p>Sumber Data:</p>
+            <pre id="original"></pre>
+            <br/>
+            <p>Fungsi:</p>
+<pre>
+<code>import { konfersiURLslug } from 'mds-helper';
+
+...
+konfersiURLslug(data)
+...</code>
+</pre>
+        </div>
+        <div class="result">
+            <p>Output Data:</p>
+            <pre id="update"></pre>
+        </div>
+    </div>
+    <script>
+        //Sample Data
+        data = "Ini Url belum bener & mengandung symbol@#%";
+        
+        //Fungsi
+        konfersiURLslug = (text) => {
+            if (!text) return;
+                var result = text.toLowerCase().replace('.', ' ').replace('-', ' ').replace(/[^\w ]+/g, '').replace(/ +/g, '-');
+            return result;
+        };
+        var update = konfersiURLslug(data);
+        
+        // //DOM/Binding Data ke HTML
+        document.getElementById("original").textContent = "\"data\":"+JSON.stringify(data, 1,0);
+        document.getElementById("update").textContent = JSON.stringify(update, 1,0);
+
+        // console.log('Original:', data);
+        // console.log('Update:', update);
+    </script>
+
+</body>
+</html>
+
+

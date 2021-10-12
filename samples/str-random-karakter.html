@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Perpendek Interger - (contoh 1200 = 1.2k)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css"></link>
+</head>
+<body>
+    <nav><a href="../index.html">❮</a>Membuat Random Karakter</nav>
+    <div class="row">
+        <div class="content">
+            <p>Sumber Data:</p>
+            <br/>
+            <p>Fungsi:</p>
+<pre>
+<code>import { randomKarakter } from 'mds-helper';
+    
+...
+randomKarakter(10)
+...</code>
+</pre>
+        </div>
+        <div class="result">
+            <p>Output Data:</p>
+            <pre id="results"></pre>
+        </div>
+    </div>
+    <script>
+        //Fungsi
+        randomKarakter = (length) => {
+            var chars = 'abcefghijklnopqrtuvwxyz0123456789'; //sample random karakter
+            var result = '';
+            for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
+            return result;
+        };
+        var update = randomKarakter(10)
+        
+        //DOM/Binding Data ke HTML
+        document.getElementById("results").textContent = JSON.stringify(update, 1,0);
+
+        console.log('Created:', update);
+    </script>
+
+</body>
+</html>
+
+

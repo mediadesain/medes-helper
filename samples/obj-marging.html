@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Menggabungkan Object</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css"></link>
+</head>
+<body>
+    <nav><a href="../index.html">❮</a>Menggabungkan Object</nav>
+    <div class="row">
+        <div class="content">
+            <p>Sumber Data:</p>
+            <pre id="original"></pre>
+            <pre id="neworiginal"></pre>
+            <pre>"result":{}</pre>
+            <br/>
+            <p>Fungsi:</p>
+<pre>
+<code>Object.assign(result,data,newdata)</code>
+</pre>
+        </div>
+        <div class="result">
+            <p>Output Data:</p>
+            <pre id="results"></pre>
+        </div>
+    </div>
+    <script>
+        //Sample Data
+        data = {
+            firstname: "Jhon",
+            lastname: "Doe",
+            gender: "male"
+        };
+        newdata = {
+            address: {
+                city: "Melbourne",
+                zip: "123123"
+            },
+            email: "johndoe@mail.com",
+            gender: "ccc"
+        };
+        
+        //Fungsi
+        var result = {}
+        Object.assign(result,data,newdata)
+
+        //DOM/Binding Data ke HTML
+        document.getElementById("original").textContent = "\"data\":"+JSON.stringify(data, 1,2);
+        document.getElementById("neworiginal").textContent = "\"newdata\":"+JSON.stringify(newdata, 1,2);
+        document.getElementById("results").textContent = JSON.stringify(result, 1,2);
+
+        console.log('Original:',data);
+        console.log('Update:',result);
+    </script>
+
+</body>
+</html>
+
+

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hitung Unique Value</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css"></link>
+</head>
+<body>
+    <nav><a href="../index.html">❮</a>Hitung Unique Value</nav>
+    <div class="row">
+        <div class="content">
+            <p>Sumber Data:</p>
+            <pre id="original"></pre>
+            <p>Fungsi:</p>
+<pre>
+import { hitungUnikValue } from 'mds-helper';
+
+...
+<code>hitungUnikValue(data)</code>
+...
+</pre>
+        </div>
+        <div class="result">
+            <p>Output Data:</p>
+            <pre id="results"></pre>
+        </div>
+    </div>
+    <script>
+        //Sample Data
+        data = ["Web", "Web", "Web", "Web", "iOS",  "iOS", "Android", "Android", "Android"];
+        
+        //Fungsi
+        hitungUnikValue = (data) => {
+            var count = {};
+            data.forEach((i) => {
+                count[i] = (count[i] || 0) + 1;
+            });
+            return count
+        }
+        var update = hitungUnikValue(data);
+
+        //DOM/Binding Data ke HTML
+        document.getElementById("original").textContent = "\"data\":"+JSON.stringify(data, 1,0);
+        document.getElementById("results").textContent = JSON.stringify(update, 1,1);
+
+        console.log('Original:', data);
+        console.log('Update:', update);
+    </script>
+
+</body>
+</html>
+
+

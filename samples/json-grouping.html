@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gruping berdasarkan KeyValue</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css"></link>
+</head>
+<body>
+    <nav><a href="../index.html">❮</a>Gruping berdasarkan KeyValue</nav>
+    <div class="row">
+        <div class="content">
+            <p>Sumber Data:</p>
+            <pre id="original"></pre>
+            <br/>
+            <p>Fungsi:</p>
+<pre>
+<code>import { groupSeValue } from 'mds-helper';
+
+...
+groupSeValue(data, 'make')
+...</code>
+</pre>
+        </div>
+        <div class="result">
+            <p>Output Data:</p>
+            <pre id="results"></pre>
+        </div>
+    </div>
+    <script>
+        //Sample Data
+        data = [
+            { make: 'audi', model: 'r8', year: '2012' },
+            { make: 'audi', model: 'rs5', year: '2013' },
+            { make: 'ford', model: 'mustang', year: '2012' },
+            { make: 'ford', model: 'fusion', year: '2015' },
+            { make: 'kia', model: 'optima', year: '2012' }
+        ];
+        
+        //Fungsi
+        groupSeValue = (arr, key) => {
+            const keyvalue = (a) => a[key]
+            return arr.reduce((r, v, i, a, k = keyvalue(v)) => ((r[k] || (r[k] = [])).push(v), r), {});
+        }
+        var grouped = groupSeValue(data, 'make');
+
+        //DOM/Binding Data ke HTML
+        document.getElementById("original").textContent = "\"data\":"+JSON.stringify(data, 1,2);
+        document.getElementById("results").textContent = JSON.stringify(grouped, 1,2);
+
+        console.log('Original:',data);
+        console.log('Update:',grouped);
+    </script>
+
+</body>
+</html>
+
+

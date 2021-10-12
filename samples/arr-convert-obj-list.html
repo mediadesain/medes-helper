@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Convert Array to Object List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css"></link>
+</head>
+<body>
+    <nav><a href="../index.html">❮</a>Convert Array to Object List</nav>
+    <div class="row">
+        <div class="content">
+            <p>Sumber Data:</p>
+            <pre id="original"></pre>
+            <p>Fungsi:</p>
+<pre>
+import { listObject } from 'mds-helper';
+
+...
+<code>listObject(data, 'id')</code>
+...
+</pre>
+        </div>
+        <div class="result">
+            <p>Output Data:</p>
+            <pre id="results"></pre>
+        </div>
+    </div>
+    <script>
+        //Sample Data
+        data = [
+            {
+                "firstNmae": "Kent",
+                "lastName": "Castaneda",
+                "email": "kentcastaneda@cowtown.com",
+                "birthDate": 1531618626242,
+                "basicSalary": 2653.36,
+                "status": "Singe",
+                "group": "CS",
+                "description": 1618665543471,
+                "id": "GRF4FATARZ1IE1H"
+            },
+            {
+                "firstNmae": "Sutton",
+                "lastName": "Neal",
+                "email": "suttonneal@cowtown.com",
+                "birthDate": 1555500398698,
+                "basicSalary": 3369.97,
+                "status": "Married",
+                "group": "Manager",
+                "description": 1579686047332,
+                "id": "I6NURNL8HY9WJU9"
+            },
+            {
+                "firstNmae": "Bridgette",
+                "lastName": "Taylor",
+                "email": "bridgettetaylor@cowtown.com",
+                "birthDate": 1536547772863,
+                "basicSalary": 2069.93,
+                "status": "Singe",
+                "group": "CS",
+                "description": 1586476659831,
+                "id": "ELA193EAJU9UBBR"
+            },
+            {
+                "firstNmae": "Helene",
+                "lastName": "Holmes",
+                "email": "heleneholmes@cowtown.com",
+                "birthDate": 1423290154438,
+                "basicSalary": 3078.03,
+                "status": "Singe",
+                "group": "Manager",
+                "description": 1616736325376,
+                "id": "HOQ2Z60ZC2UG4GI"
+            }
+            ]
+        
+        //Fungsi
+        listObject = (arr, objectkey) => {
+            var groupObj = {}
+            for(const item of arr){
+                var newobj = {};
+                newobj[item[objectkey]] = item;
+                Object.assign(groupObj, newobj);
+            }
+            return groupObj
+        };
+        var update = listObject(data, 'id');
+
+        //DOM/Binding Data ke HTML
+        document.getElementById("original").textContent = "\"data\":"+JSON.stringify(data, 1,1);
+        document.getElementById("results").textContent = JSON.stringify(update, 1,1);
+
+        console.log('Original:', data);
+        console.log('Update:', update);
+    </script>
+
+</body>
+</html>
+
+

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hapus KeyValue Jika ObjectValue Kosong</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css"></link>
+</head>
+<body>
+    <nav><a href="../index.html">❮</a>Hapus KeyValue Jika ObjectValue Kosong</nav>
+    <div class="row">
+        <div class="content">
+            <p>Sumber Data:</p>
+            <pre id="original"></pre>
+            <br/>
+            <p>Fungsi:</p>
+<pre>
+<code>import { hapusObjValKosong } from 'mds-helper';
+
+...
+hapusObjValKosong(data)
+...</code>
+</pre>
+        </div>
+        <div class="result">
+            <p>Output Data:</p>
+            <pre id="results"></pre>
+        </div>
+    </div>
+    <script>
+        //Sample Data
+        data = {
+            firstname: "Jhon",
+            lastname: "",
+            gender: null,
+            address: undefined,
+        };
+        
+        //Fungsi
+        hapusObjValKosong = (obj) => {
+            for (var namaProperty in obj) {
+                if (obj[namaProperty] === null || obj[namaProperty] === undefined || obj[namaProperty] === "") {
+                    delete obj[namaProperty];
+                }
+            }
+            return obj
+        };
+        var update = hapusObjValKosong(data)
+        
+        //DOM/Binding Data ke HTML
+        document.getElementById("original").textContent = JSON.stringify({
+            firstname: "Jhon",
+            lastname: "",
+            gender: null,
+            address: undefined,
+        }, 1,0);
+        document.getElementById("results").textContent = JSON.stringify(update, 1,0);
+
+        console.log('Original:', data);
+        console.log('Update:', update);
+    </script>
+
+</body>
+</html>
+
+

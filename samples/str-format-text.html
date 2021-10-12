@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Format Text</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css"></link>
+</head>
+<body>
+    <nav><a href="../index.html">❮</a>Format Text <small><i>(Lowercase, UpperCase, Titlecase etc)</i></small></nav>
+    <div class="row">
+        <div class="content">
+            <p>Sumber Data:</p>
+            <pre id="original"></pre>
+            <br/>
+            <p>Fungsi:</p>
+<pre>
+<code>import { lowerCase, upperCase, titleCase, pascalCase } from 'mds-helper';
+
+...
+lowerCase(data)
+upperCase(data)
+titleCase(data)
+pascalCase(data)
+...</code>
+</pre>
+        </div>
+        <div class="result">
+            <p>Output Data:</p>
+            <pre id="update_1"></pre>
+            <pre id="update_2"></pre>
+            <pre id="update_3"></pre>
+            <pre id="update_4"></pre>
+        </div>
+    </div>
+    <script>
+        //Sample Data
+        data = "Ini Contoh String";
+        
+        //Fungsi
+        lowerCase = (str) => {
+            return str.toLowerCase()
+        };
+        upperCase = (str) => {
+            return str.toUpperCase()
+        };
+        titleCase = (str) => {
+            return str.replace(/\b(\w)/g, k => k.toUpperCase())
+        };
+        const pascalCase = (str) => {
+            return str.toLowerCase().replace(/[^\w\s]/gi, ' ').replace(/(?:_| |\b)(\w)/g, (p1) => {
+            return p1.toUpperCase() }).replace(/\s/g, '')
+        };
+        var update_1 = lowerCase(data);
+        var update_2 = upperCase(data);
+        var update_3 = titleCase(data);
+        var update_4 = pascalCase(data);
+        
+        // //DOM/Binding Data ke HTML
+        document.getElementById("original").textContent = "\"data\":"+JSON.stringify(data, 1,0);
+        document.getElementById("update_1").textContent = JSON.stringify(update_1, 1,0);
+        document.getElementById("update_2").textContent = JSON.stringify(update_2, 1,0);
+        document.getElementById("update_3").textContent = JSON.stringify(update_3, 1,0);
+        document.getElementById("update_4").textContent = JSON.stringify(update_4, 1,0);
+
+        // console.log('Original:', data);
+        // console.log('Update:', update);
+    </script>
+
+</body>
+</html>
+
+
