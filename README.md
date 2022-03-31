@@ -1,3 +1,6 @@
+
+> This repositori is deprecated. For update version use node_modules package [MedesUtils](https://doc.mediadesain.com/utils/string)
+
 # Dokumentasi Mds Helper Function
 
 Custom Function Javascript Library yang dirangkum oleh mediadesain
